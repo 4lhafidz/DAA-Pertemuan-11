@@ -1,0 +1,276 @@
+# Create dictionary with graph element
+'''
+a-----b
+|     |
+|     |
+c-----d----e
+'''
+
+graph = {"a" : ["b", "c"],
+         "b" : ["a", "d"],
+         "c" : ["a", "d"],
+         "d" : ["e"],
+         "e" : ["d"]
+          }
+
+print(graph)
+==========================================================================================
+# Latihan buat graph
+'''
+T-------U-------V
+|               |
+W---------------X
+|               |
+Z               S
+'''
+
+graph1 = {  "T" : ["U", "W"],
+            "U" : ["V"],
+            "V" : ["U", "X"],
+            "W" : ["X", "Z"],
+            "X" : ["S", "W"]
+        }
+
+print(graph1)
+==========================================================================================
+# Latihan buat graph
+'''
+r-------o-------m
+|       |       |
+l-------p-------n
+'''
+
+graph2 = {  "r" : ["o", "l"],
+            "o" : ["m", "p"],
+            "m" : ["o", "n"],
+            "l" : ["r", "p"],
+            "p" : ["o", "n"],
+            "n" : ["m", "p"]
+        }
+
+print(graph2)
+==========================================================================================
+# Menampilkan simpul graph
+
+class Graph:
+  def __init__(self, gdict=None):
+    if gdict is None:
+      gdict = {}
+    self.gdict = gdict
+
+  # get the keys of the dictionnary
+  def getVertices(self):
+    return list(self.gdict.keys())
+
+  def edges(self):
+    return self.findedges()
+
+  # add the new edge
+  def addEdge(self, edge):
+    edge = set(edge)
+    (vrtx1, vrtx2) = tuple(edge)
+    if vrtx1 in self.gdict:
+      self.gdict[vrtx1].append(vrtx2)
+    else:
+      self.gdict[vrtx1] = [vrtx2]
+
+  # Find the distinct list of edges
+  def findedges(self):
+    edgename = []
+    for vrtx in self.gdict:
+      for nxtvrtx in self.gdict[vrtx]:
+        if {nxtvrtx, vrtx} not in edgename:
+          edgename.append({vrtx, nxtvrtx})
+    return edgename
+
+  # Add the vertex as a key
+  def addVertex(self, vrtx):
+    if vrtx not in self.gdict:
+      self.gdict[vrtx] = []
+
+# Create dictionary with graph elements
+graph_elements = {
+    "a" : ["b", "c"],
+    "b" : ["a", "d"],
+    "c" : ["a", "d"],
+    "d" : ["e"],
+    "e" : ["d"]
+}
+
+# Create an instance of the graph class and pass the graph_elements
+g = Graph(graph_elements)
+
+
+# Print the vertices by calling the getVertices method in parentheses
+print(g.getVertices())
+print(g.edges())
+
+# Menambah simpul
+g.addVertex("f")
+print(g.getVertices())
+
+# menambah sudut
+g.addEdge({'a', 'e'})
+g.addEdge({'a', 'c'})
+print(g.edges())
+==========================================================================================
+# Latihan elemen simpul graph TUV
+# Create dictionary with graph elements
+graph_elements1 = {
+            "T" : ["U", "W"],
+            "U" : ["V"],
+            "V" : ["U", "X"],
+            "W" : ["X", "Z"],
+            "X" : ["S", "W"],
+            "Z" : ["W"],
+            "S" : ["X"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g1 = Graph(graph_elements1)
+
+# Print the vertices by calling the getVertices method in parentheses
+print(g1.getVertices())
+==========================================================================================
+# Latihan elemen simpul graph rom
+# Create dictionary with graph elements
+graph_elements2 = {
+            "r" : ["o", "l"],
+            "o" : ["m", "p"],
+            "m" : ["o", "n"],
+            "l" : ["r", "p"],
+            "p" : ["o", "n"],
+            "n" : ["m", "p"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g2 = Graph(graph_elements2)
+
+# Print the vertices by calling the getVertices method in parentheses
+print(g2.getVertices())
+==========================================================================================
+# Latihan sudut graph TUV
+# Create dictionary with graph elements
+graph_elements1 = {
+            "T" : ["U", "W"],
+            "U" : ["V"],
+            "V" : ["U", "X"],
+            "W" : ["X", "Z"],
+            "X" : ["S", "W"],
+            "Z" : ["W"],
+            "S" : ["X"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g1 = Graph(graph_elements1)
+
+# Print the vertices by calling the getVertices method in parentheses
+print(g1.edges())
+==========================================================================================
+# Latihan sudut graph r o m
+# Create dictionary with graph elements
+graph_elements2 = {
+            "r" : ["o", "l"],
+            "o" : ["m", "p"],
+            "m" : ["o", "n"],
+            "l" : ["r", "p"],
+            "p" : ["o", "n"],
+            "n" : ["m", "p"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g2 = Graph(graph_elements2)
+
+# Print the vertices by calling the getVertices method in parentheses
+print(g2.edges())
+==========================================================================================
+# Latihan tambah simpul pada graph TUV
+graph_elements1 = {
+            "T" : ["U", "W"],
+            "U" : ["V"],
+            "V" : ["U", "X"],
+            "W" : ["X", "Z"],
+            "X" : ["S", "W"],
+            "Z" : ["W"],
+            "S" : ["X"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g1 = Graph(graph_elements1)
+
+g1.addVertex("f")
+print(g1.getVertices())
+==========================================================================================
+# Latihan tambah simpul pada graph r o m
+# Create dictionary with graph elements
+graph_elements2 = {
+            "r" : ["o", "l"],
+            "o" : ["m", "p"],
+            "m" : ["o", "n"],
+            "l" : ["r", "p"],
+            "p" : ["o", "n"],
+            "n" : ["m", "p"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g2 = Graph(graph_elements2)
+
+g2.addVertex("f")
+print(g2.getVertices())
+==========================================================================================
+# Latihan tambah simpul pada edge TUV
+# Create dictionary with graph elements
+graph_elements1 = {
+            "T" : ["U", "W"],
+            "U" : ["V"],
+            "V" : ["U", "X"],
+            "W" : ["X", "Z"],
+            "X" : ["S", "W"],
+            "Z" : ["W"],
+            "S" : ["X"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g1 = Graph(graph_elements1)
+
+g1.addEdge({'a', 'e'})
+g1.addEdge({'a', 'c'})
+print(g1.edges())
+==========================================================================================
+# Latihan tambah simpul pada edge r o m
+# Create dictionary with graph elements
+graph_elements2 = {
+            "r" : ["o", "l"],
+            "o" : ["m", "p"],
+            "m" : ["o", "n"],
+            "l" : ["r", "p"],
+            "p" : ["o", "n"],
+            "n" : ["m", "p"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g2 = Graph(graph_elements2)
+
+g2.addEdge({'a', 'e'})
+g2.addEdge({'a', 'c'})
+print(g2.edges())
+==========================================================================================
+# Latihan tambah simpul pada edge r o m
+# Create dictionary with graph elements
+graph_elements2 = {
+            "r" : ["o", "l"],
+            "o" : ["m", "p"],
+            "m" : ["o", "n"],
+            "l" : ["r", "p"],
+            "p" : ["o", "n"],
+            "n" : ["m", "p"]
+        }
+
+# Create an instance of the graph class and pass the graph_elements
+g2 = Graph(graph_elements2)
+
+g2.addEdge({'a', 'e'})
+g2.addEdge({'a', 'c'})
+print(g2.edges())
+
+
